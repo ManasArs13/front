@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Response::factory()
             ->has(Cookie::factory()->count(2))
             ->has(Header::factory()->count(2))
+            ->count(3)
             ->create();
     }
 }
