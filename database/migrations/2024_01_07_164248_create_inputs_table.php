@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('headers', function (Blueprint $table) {
+        Schema::create('inputs', function (Blueprint $table) {
             $table->uuid('id');
+            $table->enum('type', ['text', 'file'])->default('text');
             $table->string('key', 2000);
             $table->string('value', 2000);
-           // $table->integer('time')->nullable();
+            $table->integer('time')->nullable();
 
-            $table->uuid('headertable_id');
-            $table->string('headertable_type');
+            $table->foreignUuid('request_id')->constrained('requests')->cascadeOnDelete();
         });
     }
 
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('headers');
+        Schema::dropIfExists('inputs');
     }
 };

@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('responses', function (Blueprint $table) {
+        Schema::create('requests', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->timestamps();
-            $table->text('body')->nullable();
-            
+            $table->text('url');
+            $table->enum('meth', ['GET', 'POST', 'PUT', 'PATCH', 'DEL'])->default('GET');
             $table->string('session_id')->nullable();
-            $table->foreign('session_id')->references('id')->on('sessions')->cascadeOnDelete();
-
-            $table->foreignUuid('user_id')->nullable()->constrained('users')->cascadeOnDelete();
+            $table->foreign('session_id')->references('id')->on('sessions')->cascadeOnDelete();   
         });
     }
 
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('responses');
+        Schema::dropIfExists('requests');
     }
 };

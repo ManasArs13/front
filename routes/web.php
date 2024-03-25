@@ -1,27 +1,31 @@
 <?php
 
+use App\Http\Controllers\CookieController;
+use App\Http\Controllers\HeaderController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ResponseController;
+use App\Http\Controllers\InputController;
+use App\Http\Controllers\ResController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReqController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/responses', [ResponseController::class, 'index'])->name('responses');
+//Route::get('/about', [HomeController::class, 'about'])->name('about');
+Route::get('/docs', [HomeController::class, 'docs'])->name('docs');
+Route::get('/support', [HomeController::class, 'support'])->name('support');
+
+
+Route::resource('response', ResController::class)->only([
+    'index', 'store','update', 'show', 'destroy'
+]);
+
+Route::resource('request', ReqController::class)->only([
+    'index', 'store', 'update', 'show', 'destroy'
+]);
+
+Route::resource('header', HeaderController::class)->only(['store', 'destroy']);
+Route::resource('cookie', CookieController::class)->only(['store', 'destroy']);
+Route::resource('input', InputController::class)->only('store', 'destroy');
 
 
 Route::get('/dashboard', function () {

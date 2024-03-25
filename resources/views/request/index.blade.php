@@ -23,7 +23,7 @@
         @if (session('success'))
             <div x-data="{ open: true }" x-show="open"
                 class="mb-5 w-full items-center rounded-lg bg-green-200 px-6 py-5 text-base text-green-800 inline-flex">
-                {{ session('success')}}
+                {{ session('success') }}
                 <button type="button" x-on:click="open = ! open"
                     class="ml-auto box-content rounded-none border-none p-1 text-warning-900 opacity-50 hover:text-warning-900 hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none"
                     data-te-alert-dismiss aria-label="Close">
@@ -57,35 +57,35 @@
                 </button>
             </div>
         @endif
-        
+
         <h2 class="text-3xl lg:text-4xl font-bold lg:tracking-tight basis-full">
-            <a href="{{ route('response.index') }}" class="hover:text-gray-500">
-                {{ __('api.for response')}}
+            <a href="{{ route('request.index') }}" class="hover:text-gray-500">
+                {{ __('api.for request') }}
             </a>
         </h2>
-        <div class="flex flex-row mt-8">
-            <div class="basis-1/3">
+        <div class="flex flex-row mt-8 flex-nowrap">
+            <div class="basis-1/3 break-all whitespace-nowrap overflow-hidden">
                 <ul class="my-8">
-                    @foreach ($responses as $response)
+                    @foreach ($requests as $request)
                         <li class="text-md my-5">
-                            <a href="{{ route('response.show', ['response' => $response->id]) }}"
+                            <a href="{{ route('request.show', ['request' => $request->id]) }}"
                                 class="hover:text-slate-500">
                                 <div class="flex flex-row justify-between relative" x-data="{ show: false }"
-                                    x-on:mouseover="show=true" x-on:mouseout="show=false">
-                                    <div class="basis-full">
-                                        @if (url()->current() == route('response.show', ['response' => $response->id]))
+                                    @mouseover="show=true" @mouseout="show=false">
+                                    <div class="basis-11/12 break-all whitespace-nowrap overflow-hidden">
+                                        @if (url()->current() == route('request.show', ['request' => $request->id]))
                                             <h5
-                                                class="text-md text-teal-500 break-all whitespace-nowrap overflow-hidden">
-                                                {{ $response->id }}
+                                                class="text-sm text-teal-500 break-all whitespace-nowrap overflow-hidden">
+                                                {{ $request->meth }} {{ $request->url }}
                                             </h5>
                                         @else
-                                            <h5 class="text-md break-all whitespace-nowrap overflow-hidden">
-                                                {{ $response->id }}
+                                            <h5 class="text-sm break-all whitespace-nowrap overflow-hidden">
+                                                {{ $request->meth }} {{ $request->url }}
                                             </h5>
                                         @endif
                                     </div>
-                                    <div class="ml-1 absolute right-0" x-show="show" x-cloak>
-                                        <form action="{{ route('response.destroy', ['response' => $response->id]) }}"
+                                    <div class="ml-1 absolute right-0" x-show="show">
+                                        <form action="{{ route('request.destroy', ['request' => $request->id]) }}"
                                             method="post" class="">
                                             @csrf
                                             @method('DELETE')
@@ -106,17 +106,35 @@
                         </li>
                         <hr>
                     @endforeach
-                    <li class="text-md my-5">
-                        <div class="text-center ">
-                            <form action="{{ route('response.store') }}" method="post"
-                                class="justify-center mt-5 flex">
-                                @csrf
-                                <button type="submit"
-                                    class="ml-5 text-lg block text-slate-500 hover:text-slate-800">
-                                    нажмите, чтобы добавить
-                                </button>
-                            </form>
-                        </div>
+                    <li class="text-md my-5 relative">
+                        <form method="POST" enctype="multipart/form-data" action="{{ route('request.store') }}"
+                            class="flex flex-row text-sm">
+                            @csrf
+                            @method('POST')
+
+                            <select name="meth" class="basis-2/12 rounded-l" required>
+                                <option value="GET">GET</option>
+                                <option value="POST">POST</option>
+                                <option value="PUT">PUT</option>
+                                <option value="PATCH">PATCH</option>
+                                <option value="DEL">DELETE</option>
+                            </select>
+
+                            <input type="text" name="url" required
+                                class="basis-8/12 m-0 block w-full min-w-0 flex-auto rounded-r border border-solid border-neutral-300 px-3 py-[0.25rem] text-base font-normal text-neutral-700 focus:border-primary"
+                                placeholder="url" />
+
+
+                            <button type="submit" class="justify-center h-full text-lg rounded-full absolute right-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                    class="w-6 h-6 m-auto fill-gray-800 hover:fill-teal-600">
+                                    <path fill-rule="evenodd"
+                                        d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 9a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V15a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V9Z"
+                                        clip-rule="evenodd" />
+                                </svg>
+
+                            </button>
+                        </form>
                     </li>
                 </ul>
             </div>
