@@ -12,13 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('headers', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-            $table->string('key', 1000);  // ! доработать 
-            $table->string('value', 1000);// ! доработать
-            $table->integer('time')->nullable();
+            $table->uuid('id');
+            $table->string('key', 2000);
+            $table->string('value', 2000);
+           // $table->integer('time')->nullable();
 
-            $table->foreignUuid('response_id')->constrained('responses')->cascadeOnDelete();
+            $table->uuid('headertable_id');
+            $table->string('headertable_type');
         });
     }
 

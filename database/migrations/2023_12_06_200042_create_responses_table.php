@@ -14,9 +14,12 @@ return new class extends Migration
         Schema::create('responses', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->timestamps();
-            $table->json('body');
-            $table->string('session_id');
+            $table->text('body')->nullable();
+            
+            $table->string('session_id')->nullable();
             $table->foreign('session_id')->references('id')->on('sessions')->cascadeOnDelete();
+
+            $table->foreignUuid('user_id')->nullable()->constrained('users')->cascadeOnDelete();
         });
     }
 

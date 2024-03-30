@@ -12,15 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('cookies', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-            $table->string('key', 1000);  // ! доработать 
-            $table->string('value', 1000);// ! доработать
-            $table->integer('time')->nullable();
+            $table->uuid('id');
+            $table->string('key', 2000); 
+            $table->string('value', 2000);
+           // $table->time('time')->nullable();
 
-            $table->foreignUuid('response_id')->constrained('responses')->cascadeOnDelete();
-            // $table->unsignedBigInteger('response_id');
-            // $table->foreign('resp_id')->references('id')->on('resps')->cascadeOnDelete();
+           $table->uuid('cookietable_id');
+           $table->string('cookietable_type');
         });
     }
 
