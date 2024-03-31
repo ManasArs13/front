@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="flex flex-col w-full mx-auto max-w-7xl p-10 min-h-screen">
+    <div class="flex flex-col w-full mx-auto max-w-7xl p-2 lg:p-10 min-h-screen">
 
         @if (session('alert'))
             <div x-data="{ open: true }" x-show="open"
@@ -59,9 +59,9 @@
         @endif
 
         <div x-data="{ open: true }" x-show="open"
-            class="mb-5 w-full border-2 border-sky-400 items-center rounded-lg bg-sky-200 px-6 py-5 text-base text-sky-700 inline-flex">
+            class="hidden lg:inline-flex mb-5 w-full border-2 border-sky-400 items-center rounded-lg bg-sky-200 px-0 lg:px-6 py-0 lg:py-5 text-xs lg:text-base text-sky-700">
             <a href="https://developer.mozilla.org/ru/docs/Web/HTTP/CORS"
-                class="inline hover:underline">{{ __('api.cors alert') }}</a>
+                class="inline hover:underline break-words">{{ __('api.cors alert') }}</a>
             <button type="button" x-on:click="open = ! open"
                 class="ml-auto box-content rounded-none border-none p-1 text-warning-900 opacity-50 hover:text-warning-900 hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none"
                 data-te-alert-dismiss aria-label="Close">
@@ -81,23 +81,24 @@
                 {{ __('api.for request') }}
             </a>
         </h2>
-        <div class="flex flex-row mt-8 flex-nowrap">
-            <div class="basis-1/3 break-all whitespace-nowrap overflow-hidden">
-                <ul class="my-8">
+
+        <div class="flex flex-row mt-3 lg:mt-8 flex-wrap md:flex-nowrap overflow-auto">
+            <div class="flex basis-full md:basis-1/3">
+                <ul class="my-4 lg:my-8">
                     @foreach ($requests as $request)
                         <li class="text-md my-5">
                             <a href="{{ route('request.show', ['request' => $request->id]) }}"
                                 class="hover:text-slate-500">
                                 <div class="flex flex-row justify-between relative" x-data="{ show: false }"
                                     x-on:mouseover="show=true" x-on:mouseout="show=false">
-                                    <div class="basis-11/12 break-all whitespace-nowrap overflow-hidden">
+                                    <div class="basis-full text-xs md:text-sm lg:text-lg overflow-hidden">
                                         @if (url()->current() == route('request.show', ['request' => $request->id]))
                                             <h5
-                                                class="text-sm text-teal-500 break-all whitespace-nowrap overflow-hidden">
+                                                class="text-teal-500 break-all whitespace-nowrap overflow-hidden">
                                                 {{ $request->meth }} {{ $request->url }}
                                             </h5>
                                         @else
-                                            <h5 class="text-sm break-all whitespace-nowrap overflow-hidden">
+                                            <h5 class="break-all whitespace-nowrap overflow-hidden">
                                                 {{ $request->meth }} {{ $request->url }}
                                             </h5>
                                         @endif
@@ -126,11 +127,13 @@
                     @endforeach
                     <li class="text-md my-5 relative">
                         <form method="POST" enctype="multipart/form-data" action="{{ route('request.store') }}"
-                            class="flex flex-row text-sm px-1">
+                            class="flex flex-row text-sm">
                             @csrf
                             @method('POST')
 
-                            <select name="meth" class="basis-2/12 border-0 rounded-l bg-slate-100" required>
+                            <select name="meth"
+                                class="basis-2/12 rounded-l ml-1 border-l border-y border-solid border-neutral-300"
+                                required>
                                 <option value="GET">GET</option>
                                 <option value="POST">POST</option>
                                 <option value="PUT">PUT</option>
@@ -139,29 +142,31 @@
                             </select>
 
                             <input type="text" name="url" required
-                                class="basis-8/12 m-0 block w-full min-w-0 flex-auto rounded-r bg-slate-100 border-0 px-3 py-[0.25rem] text-base font-normal text-neutral-700 focus:border-primary"
+                                class="basis-8/12 m-0 mr-1 block w-full min-w-0 flex-auto rounded-r border-r border-y border-neutral-300 px-3 py-[0.25rem] text-base font-normal text-neutral-700 focus:border-primary"
                                 placeholder="url" />
 
-                            <button type="submit" class="justify-center h-full text-lg rounded-full absolute right-2">
+
+                            <button type="submit" class="h-full text-lg rounded-full absolute right-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                     class="w-6 h-6 m-auto fill-gray-800 hover:fill-teal-600">
                                     <path fill-rule="evenodd"
                                         d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 9a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V15a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V9Z"
                                         clip-rule="evenodd" />
                                 </svg>
+
                             </button>
                         </form>
                     </li>
                 </ul>
             </div>
-            <div x-data="sendReq" class="basis-2/3 bg-white shadow-md rounded-md mx-4 p-4">
+            <div x-data="sendReq" class="flex basis-full md:basis-2/3 flex-col bg-white shadow-md rounded-md mx-1 p-1 md:mx-4 md:p-4">
                 <div class="flex flex-row text-sm relative">
                     <form method="POST" enctype="multipart/form-data"
                         action="{{ route('request.update', ['request' => $req->id]) }}" class="flex w-full">
                         @csrf
                         @method('PUT')
 
-                        <select name="meth" class="basis-1/12 rounded-l border-0 bg-slate-100" x-model="method"
+                        <select name="meth" class="basis-1/12 rounded border-0 bg-slate-100" x-model="method"
                             required>
                             @if ($req->meth == 'GET')
                                 <option value="GET" selected='selected'>GET</option>
@@ -195,16 +200,16 @@
                         </select>
 
                         <input type="text" name="url" required x-model="url"
-                            class="basis-9/12 bg-slate-100 m-0 block w-full min-w-0 flex-auto border-0 px-3 py-[0.25rem] text-base font-normal text-neutral-700 focus:border-primary"
+                            class="basis-9/12 min-w-48 rounded bg-slate-100 m-0 block w-full flex-auto border-0 px-1 lg:px-3 mx-1 py-[0.25rem] text-base font-normal text-neutral-700 focus:border-primary"
                             placeholder="url" />
 
                         <button type="submit"
-                            class="justify-center h-full px-5 bg-slate-100 hover:bg-teal-400 border-r-2 border-teal-400 text-teal-800 ">
-                            {{ __('api.save') }}
+                            class="rounded h-full px-1 lg:px-5 bg-slate-100 hover:bg-teal-300 mr-1 text-teal-800 font-semibold">
+                            {{ __('api.update') }}
                         </button>
                     </form>
                     <button x-on:click="send"
-                        class="basis-1/12 rounded-r-lg text-center transition focus-visible:ring-2 ring-offset-2 ring-gray-200 px-5 py-1 bg-teal-400 hover:bg-slate-100 text-teal-800 flex gap-1 items-center justify-center">
+                        class="basis-1/12 rounded font-semibold text-center transition focus-visible:ring-2 ring-offset-2 ring-gray-200 px-1 lg:px-5 py-1 bg-teal-400 hover:bg-slate-200 text-teal-800 flex gap-1 items-center justify-center">
                         {{ __('api.send') }}
                     </button>
                 </div>
@@ -221,7 +226,7 @@
 
                 </div>
 
-                <div class="p-2 flex-col mx-auto mt-3" x-show="tab=='req'">
+                <div class="p-2 flex-col w-full mx-auto mt-3" x-show="tab=='req'">
                     <!-- headers -->
                     <h3 class="my-3 text-xl font-semibold leading-normal">
                         {{ __('api.headers') }}
@@ -234,10 +239,10 @@
                                         <li class="my-2" x-data="{ show: false }">
                                             <div class="text-sm flex flex-row w-100 border-b-2 py-2 relative"
                                                 x-on:mouseover="show=true" x-on:mouseout="show=false">
-                                                <div class="flex basis-1/2 px-1 overflow-hidden">
+                                                <div class="flex basis-1/2 px-1 break-all overflow-hidden min-w-0">
                                                     {{ $header->key }}
                                                 </div>
-                                                <div class="flex basis-1/2 px-1 overflow-hidden">
+                                                <div class="flex basis-1/2 pl-1 pr-10 break-all overflow-hidden min-w-0">
                                                     {{ $header->value }}
                                                 </div>
                                                 <form method="POST" enctype="multipart/form-data" x-show="show"
@@ -306,10 +311,10 @@
                                         <li class="my-2" x-data="{ show: false }">
                                             <div class="text-sm flex flex-row w-100 border-b-2 py-2 relative"
                                                 x-on:mouseover="show=true" x-on:mouseout="show=false">
-                                                <div class="flex basis-1/2 px-1 overflow-hidden">
+                                                <div class="flex basis-1/2 pl-1 break-all overflow-hidden min-w-0">
                                                     {{ $cookie->key }}
                                                 </div>
-                                                <div class="flex basis-1/2 px-1 overflow-hidden">
+                                                <div class="flex basis-1/2 pl-1 pr-10 break-all overflow-hidden min-w-0">
                                                     {{ $cookie->value }}
                                                 </div>
                                                 <form method="POST" enctype="multipart/form-data" x-show="show"
@@ -378,10 +383,10 @@
                                         <li class="my-2" x-data="{ show: false }">
                                             <div class="text-sm flex flex-row w-100 border-b-2 py-2 relative"
                                                 x-on:mouseover="show=true" x-on:mouseout="show=false">
-                                                <div class="flex basis-1/2 px-1 overflow-hidden">
+                                                <div class="flex basis-1/2 pl-1 break-all overflow-hidden min-w-0">
                                                     {{ $input->key }}
                                                 </div>
-                                                <div class="flex basis-1/2 px-1 overflow-hidden">
+                                                <div class="flex basis-1/2 pl-1 pr-10 break-all overflow-hidden min-w-0">
                                                     {{ $input->value }}
                                                 </div>
                                                 <form method="POST" enctype="multipart/form-data" x-show="show"
@@ -440,14 +445,14 @@
 
                 </div>
 
-                <div class="p-2 flex-col mx-auto mt-3" x-show="tab=='pre'">
-                    <div class=" relative">
+                <div class="p-2 flex-col min-w-full mx-auto mt-3" x-show="tab=='pre'">
+                    <div class="relative">
                         <div
                             class="overflow-x-scroll min-w-full max-w-screen-md min-h-[20rem] text-left font-light text-white bg-gray-800 p-4 py-6 rounded-md">
-                            <button x-on:click="copy()" :class="copied ? 'fill-white': 'fill-teal-300' "
-                                class="flex content-center justify-center text-lg rounded-full absolute right-6 top-3">
+                            <button x-on:click="copy()" :class="copied ? 'fill-white' : 'fill-teal-300'"
+                                class="flex content-center justify-center text-lg rounded-full absolute right-2 top-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                    data-slot="icon" class="w-8 h-8 m-auto hover:fill-teal-600">
+                                    data-slot="icon" class="w-6 h-6 m-auto hover:fill-teal-600">
                                     <path fill-rule="evenodd"
                                         d="M17.663 3.118c.225.015.45.032.673.05C19.876 3.298 21 4.604 21 6.109v9.642a3 3 0 0 1-3 3V16.5c0-5.922-4.576-10.775-10.384-11.217.324-1.132 1.3-2.01 2.548-2.114.224-.019.448-.036.673-.051A3 3 0 0 1 13.5 1.5H15a3 3 0 0 1 2.663 1.618ZM12 4.5A1.5 1.5 0 0 1 13.5 3H15a1.5 1.5 0 0 1 1.5 1.5H12Z"
                                         clip-rule="evenodd" />

@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="flex flex-col w-full mx-auto max-w-7xl p-10 min-h-screen">
+    <div class="flex flex-col w-full mx-auto max-w-7xl p-2 lg:p-10 min-h-screen">
 
         @if (session('alert'))
             <div x-data="{ open: true }" x-show="open"
@@ -63,8 +63,8 @@
                 {{ __('api.for request') }}
             </a>
         </h2>
-        <div class="flex flex-row mt-8 flex-nowrap">
-            <div class="basis-1/3 break-all whitespace-nowrap overflow-hidden">
+        <div class="flex flex-row mt-3 lg:mt-8 flex-wrap md:flex-nowrap overflow-auto">
+            <div class="flex basis-full md:basis-1/3">
                 <ul class="my-8">
                     @foreach ($requests as $request)
                         <li class="text-md my-5">
@@ -112,7 +112,7 @@
                             @csrf
                             @method('POST')
 
-                            <select name="meth" class="basis-2/12 rounded-l" required>
+                            <select name="meth" class="basis-2/12 rounded-l ml-1 border-l border-y border-solid border-neutral-300" required>
                                 <option value="GET">GET</option>
                                 <option value="POST">POST</option>
                                 <option value="PUT">PUT</option>
@@ -121,11 +121,11 @@
                             </select>
 
                             <input type="text" name="url" required
-                                class="basis-8/12 m-0 block w-full min-w-0 flex-auto rounded-r border border-solid border-neutral-300 px-3 py-[0.25rem] text-base font-normal text-neutral-700 focus:border-primary"
+                                class="basis-8/12 m-0 mr-1 block w-full min-w-0 flex-auto rounded-r border-r border-y border-neutral-300 px-3 py-[0.25rem] text-base font-normal text-neutral-700 focus:border-primary"
                                 placeholder="url" />
 
 
-                            <button type="submit" class="justify-center h-full text-lg rounded-full absolute right-1">
+                            <button type="submit" class="h-full text-lg rounded-full absolute right-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                     class="w-6 h-6 m-auto fill-gray-800 hover:fill-teal-600">
                                     <path fill-rule="evenodd"
@@ -138,7 +138,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="basis-2/3 bg-white shadow-md rounded-md mx-4 p-4">
+            <div class="flex basis-full md:basis-2/3 flex-col bg-white shadow-md rounded-md mx-1 p-1 md:mx-4 md:p-4">
                 <h2 class="my-3 text-2xl font-semibold leading-normal text-center">
                     Выберите API
                 </h2>

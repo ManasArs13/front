@@ -17,7 +17,7 @@ class InputController extends Controller
                 ->find($request->req_id);
 
             if (!$req) {
-                return redirect()->route('response.index')->with('alert', 'The api not founded');
+                return redirect()->route('response.index')->with('alert', 'API не найден');
             }
 
             Input::create([
@@ -26,10 +26,10 @@ class InputController extends Controller
                 'value'       => $request->input_value,
             ]);
 
-            return redirect()->route('request.show', ['request' => $req->id])->with('success', 'The input saved');
+            return redirect()->route('request.show', ['request' => $req->id])->with('success', 'Input сохранён');
         }
 
-        return redirect()->back()->with('alert', 'The API not founded');             
+        return redirect()->back()->with('alert', 'API не найден');             
     }
 
     public function destroy(Request $request, $input)
@@ -41,14 +41,14 @@ class InputController extends Controller
                         ->find($request->req_id);
 
             if (!$req) {
-                return redirect()->back()->with('alert', 'The API not founded');
+                return redirect()->back()->with('alert', 'API не найден');
             }
 
             Input::destroy($input);
 
-            return redirect()->back()->with('success', 'The input deleted');
+            return redirect()->back()->with('success', 'Input удалён');
         }
 
-        return redirect()->back()->with('alert', 'The API not founded');
+        return redirect()->back()->with('alert', 'API не найден');
     }
 }

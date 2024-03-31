@@ -16,5 +16,5 @@ return [
 'save'            => 'save',
 'cors alert'      => 'To work correctly, you need to disable CORS protection! For more information, see here https://developer.mozilla.org/ru/docs/Web/HTTP/CORS',
 'change response' => 'Сhange',
-
+'update'          => 'update',
 ];

@@ -8,7 +8,6 @@
 
     <title>{{ config('app.name') }}</title>
 
-    <link rel="icon" href="favicon.ico"> <!-- 32×32 -->
     <link rel="icon" href="favicon.png"> <!-- 32×32 -->
 
     <!-- Fonts -->

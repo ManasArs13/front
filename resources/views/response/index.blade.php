@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="flex flex-col w-full mx-auto max-w-7xl p-10 min-h-screen">
+    <div class="flex flex-col w-full mx-auto max-w-7xl p-1 md:p-2 lg:p-10 min-h-screen">
 
         @if (session('alert'))
             <div x-data="{ open: true }" x-show="open"
@@ -63,25 +63,25 @@
                 {{ __('api.for response')}}
             </a>
         </h2>
-        <div class="flex flex-row mt-8">
-            <div class="basis-1/3">
-                <ul class="my-8">
+
+        <div class="flex flex-row mt-3 lg:mt-8 flex-wrap md:flex-nowrap overflow-auto">
+            <div class="basis-full md:basis-1/3">
+                <ul class="my-4 lg:my-8">
                     @foreach ($responses as $response)
                         <li class="text-md my-5">
                             <a href="{{ route('response.show', ['response' => $response->id]) }}"
                                 class="hover:text-slate-500">
                                 <div class="flex flex-row justify-between relative" x-data="{ show: false }"
                                     x-on:mouseover="show=true" x-on:mouseout="show=false">
-                                    <div class="basis-full">
+                                    <div class="basis-full text-xs md:text-sm lg:text-lg">
                                         @if (url()->current() == route('response.show', ['response' => $response->id]))
-                                            <h5
-                                                class="text-md text-teal-500 break-all whitespace-nowrap overflow-hidden">
+                                            <p class="text-teal-500 break-all whitespace-nowrap overflow-hidden">
                                                 {{ $response->id }}
-                                            </h5>
+                                            </p>
                                         @else
-                                            <h5 class="text-md break-all whitespace-nowrap overflow-hidden">
+                                            <p class="break-all whitespace-nowrap overflow-hidden">
                                                 {{ $response->id }}
-                                            </h5>
+                                            </p>
                                         @endif
                                     </div>
                                     <div class="ml-1 absolute right-0" x-show="show" x-cloak>
@@ -112,7 +112,7 @@
                                 class="justify-center mt-5 flex">
                                 @csrf
                                 <button type="submit"
-                                    class="ml-5 text-lg block text-slate-500 hover:text-slate-800">
+                                    class="text-xs md:text-sm lg:text-lg block text-slate-500 hover:text-slate-800">
                                     нажмите, чтобы добавить
                                 </button>
                             </form>
@@ -120,7 +120,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="basis-2/3 bg-white shadow-md rounded-md mx-4 p-4">
+            <div class="flex basis-full md:basis-2/3 bg-white shadow-md rounded-md mx-1 p-1 md:mx-4 md:p-4">
                 <h2 class="my-3 text-2xl font-semibold leading-normal text-center">
                     Выберите API
                 </h2>

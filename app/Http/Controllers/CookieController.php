@@ -18,7 +18,7 @@ class CookieController extends Controller
                 ->find($request->res_id);
 
             if (!$response) {
-                return redirect()->route('response.index')->with('alert', 'The api not founded');
+                return redirect()->route('response.index')->with('alert', 'API не найден');
             }
 
             if (Cookie::where('cookietable_id', $response->id)->count() < 15) {
@@ -29,9 +29,9 @@ class CookieController extends Controller
                     'value'       => $request->cookie_value,
                 ]);
 
-                return redirect()->route('response.show', ['response' => $response->id])->with('success', 'The cookie saved');
+                return redirect()->route('response.show', ['response' => $response->id])->with('success', 'Cookie сохранён');
             } else {
-                return redirect()->route('response.show', ['response' => $response->id])->with('warning', 'you have raised the limit');
+                return redirect()->route('response.show', ['response' => $response->id])->with('warning', 'У вас превышен лемит');
             }
         }
 
@@ -40,7 +40,7 @@ class CookieController extends Controller
                 ->find($request->req_id);
 
             if (!$req) {
-                return redirect()->route('response.index')->with('alert', 'The api not founded');
+                return redirect()->route('response.index')->with('alert', 'API не найден');
             }
 
             if (Cookie::where('cookietable_id', $req->id)->count() < 15) {
@@ -51,13 +51,13 @@ class CookieController extends Controller
                     'value'       => $request->cookie_value,
                 ]);
 
-                return redirect()->route('request.show', ['request' => $req->id])->with('success', 'The cookie saved');
+                return redirect()->route('request.show', ['request' => $req->id])->with('success', 'Cookie сохранён');
             } else {
-                return redirect()->route('response.show', ['response' => $req->id])->with('warning', 'you have raised the limit');
+                return redirect()->route('response.show', ['response' => $req->id])->with('warning', 'У вас превышен лимит');
             }
         }
 
-        return redirect()->back()->with('alert', 'The API not founded');
+        return redirect()->back()->with('alert', 'API не найден');
     }
 
     public function destroy(Request $request, $cookie)
@@ -69,12 +69,12 @@ class CookieController extends Controller
                 ->find($request->res_id);
 
             if (!$response) {
-                return redirect()->back()->with('alert', 'The API not founded');
+                return redirect()->back()->with('alert', 'API не найден');
             }
 
             Cookie::destroy($cookie);
 
-            return redirect()->back()->with('success', 'The header deleted');
+            return redirect()->back()->with('success', 'Cookie удалён');
         }
 
         if ($request->req_id) {
@@ -82,14 +82,14 @@ class CookieController extends Controller
                 ->find($request->req_id);
 
             if (!$req) {
-                return redirect()->back()->with('alert', 'The API not founded');
+                return redirect()->back()->with('alert', 'API не найден');
             }
 
             Cookie::destroy($cookie);
 
-            return redirect()->back()->with('success', 'The header deleted');
+            return redirect()->back()->with('success', 'Cookie удалён');
         }
 
-        return redirect()->back()->with('alert', 'The API not founded');
+        return redirect()->back()->with('alert', 'API не найден');
     }
 }
