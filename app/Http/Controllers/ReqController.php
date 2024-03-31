@@ -25,11 +25,11 @@ class ReqController extends Controller
         $reqCount = Req::where('session_id', $request->session()->getId())->count();
 
         if (!Auth::check() && $reqCount > 4) {
-            return redirect()->back()->with('warning', 'register or log in to get full access');
+            return redirect()->back()->with('warning', 'Зарегистрируйтесь или войдите, чтобы получить полный доступ');
         }
 
         if ($reqCount > 10) {
-            return redirect()->back()->with('warning', 'you have raised the limit');
+            return redirect()->back()->with('warning', 'У вас превышен лимит');
         }
 
         $reg = Req::create([
@@ -38,7 +38,7 @@ class ReqController extends Controller
             'meth'          => $request->meth
         ]);
 
-        return redirect()->back()->with('success', 'The API added');
+        return redirect()->back()->with('success', 'API добавлен');
     }
 
     public function show(Request $request, $req)
@@ -48,7 +48,7 @@ class ReqController extends Controller
             ->find($req);
 
         if (!$req) {
-            return redirect()->route('response.index')->with('alert', 'The API not founded');
+            return redirect()->route('response.index')->with('alert', 'API не найден');
         }
 
         $requests = Req::where('session_id', '=', $session_id)
@@ -65,7 +65,7 @@ class ReqController extends Controller
             ->find($req);
 
         if (!$req) {
-            return redirect()->route('response.index')->with('alert', 'The API not founded');
+            return redirect()->route('response.index')->with('alert', 'API не найден');
         }
 
         $req->url = $request->url;
@@ -86,11 +86,11 @@ class ReqController extends Controller
             ->find($req);
 
         if (!$req) {
-            return redirect()->route('request.index')->with('alert', 'The API not founded');
+            return redirect()->route('request.index')->with('alert', 'API не найден');
         }
 
         $req->delete();
 
-        return redirect()->route('request.index')->with('success', 'The API deleted');
+        return redirect()->route('request.index')->with('success', 'API удалён');
     }
 }

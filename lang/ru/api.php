@@ -16,4 +16,5 @@ return [
 'save'            => 'сохранить',
 'cors alert'      => 'Для корректной работы необходимо отключить CORS защиту! Больше информации смотри тут https://developer.mozilla.org/ru/docs/Web/HTTP/CORS',
 'change response' => 'Изменить',
+'update'          => 'обновить',
 ];

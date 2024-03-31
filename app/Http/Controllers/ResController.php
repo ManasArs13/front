@@ -28,16 +28,16 @@ class ResController extends Controller
         $resCount = Res::where('session_id', $request->session()->getId())->count();
 
         if (!Auth::check() && $resCount > 4) {
-            return redirect()->back()->with('warning', 'register or log in to get full access');
+            return redirect()->back()->with('warning', 'Зарегистрируйтесь или войдите, чтобы получить полный доступ');
         }
 
         if ($resCount > 10) {
-            return redirect()->back()->with('warning', 'you have raised the limit');
+            return redirect()->back()->with('warning', 'У вас превышен лимит');
         }
 
         Res::create(['session_id' => $request->session()->getId()]);
         
-        return redirect()->back()->with('success', 'The API added');
+        return redirect()->back()->with('success', 'API добавлен');
     }
 
     public function update(Request $request, $response)
@@ -49,13 +49,13 @@ class ResController extends Controller
             ->find($response);
 
         if (!$response) {
-            return redirect()->route('response.index')->with('alert', 'The api not founded');
+            return redirect()->route('response.index')->with('alert', 'API найден');
         }
 
         $response->body = $request->body;
         $response->update();
 
-        return redirect()->route('response.show', ['response' => $response->id])->with('success', 'The body updated');
+        return redirect()->route('response.show', ['response' => $response->id])->with('success', 'body обнавлён');
     }
 
     public function show(Request $request, $response)
@@ -65,7 +65,7 @@ class ResController extends Controller
             ->find($response);
 
         if (!$response) {
-            return redirect()->route('response.index')->with('alert', 'The api not founded');
+            return redirect()->route('response.index')->with('alert', 'API не найден');
         }
 
         $responses = Res::where('session_id', '=', $session_id)
@@ -82,11 +82,11 @@ class ResController extends Controller
             ->find($response);
 
         if (!$response) {
-            return redirect()->route('response.index')->with('alert', 'The api not founded');
+            return redirect()->route('response.index')->with('alert', 'API не найден');
         }
         
         $response->delete();
 
-        return redirect()->route('response.index')->with('success', 'The API deleted');
+        return redirect()->route('response.index')->with('success', 'API добавлен');
     }
 }
