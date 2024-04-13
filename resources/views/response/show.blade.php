@@ -126,14 +126,16 @@
                         copy_text: `{!! route('get_api', ['id' => $res->id]) !!}`,
                         copied: false,
                         copy() {
-                            navigator.clipboard.write(this.copy_text)
-                                .then(() => {
-                                    this.copied = true
-                                    console.log('Text copied to clipboard');
-                                })
-                                .catch(err => {
-                                    console.error('Error in copying text: ', err);
-                                });
+                            if (navigator.clipboard) {
+                                navigator.clipboard.write(this.copy_text)
+                                    .then(() => {
+                                        this.copied = true
+                                        console.log('Text copied to clipboard');
+                                    })
+                                    .catch(err => {
+                                        console.error('Error in copying text: ', err);
+                                    });
+                            }
                         }
                     }">
                         <h5 class="text-sm lg:text-xl m-1 lg:m-2 ml-0 lg:ml-3 text-slate-200" x-text="copy_text"></h5>

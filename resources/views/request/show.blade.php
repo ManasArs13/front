@@ -93,8 +93,7 @@
                                     x-on:mouseover="show=true" x-on:mouseout="show=false">
                                     <div class="basis-full text-xs md:text-sm lg:text-lg overflow-hidden">
                                         @if (url()->current() == route('request.show', ['request' => $request->id]))
-                                            <h5
-                                                class="text-teal-500 break-all whitespace-nowrap overflow-hidden">
+                                            <h5 class="text-teal-500 break-all whitespace-nowrap overflow-hidden">
                                                 {{ $request->meth }} {{ $request->url }}
                                             </h5>
                                         @else
@@ -159,7 +158,8 @@
                     </li>
                 </ul>
             </div>
-            <div x-data="sendReq" class="flex basis-full md:basis-2/3 flex-col bg-white shadow-md rounded-md mx-1 p-1 md:mx-4 md:p-4">
+            <div x-data="sendReq"
+                class="flex basis-full md:basis-2/3 flex-col bg-white shadow-md rounded-md mx-1 p-1 md:mx-4 md:p-4">
                 <div class="flex flex-row text-sm relative">
                     <form method="POST" enctype="multipart/form-data"
                         action="{{ route('request.update', ['request' => $req->id]) }}" class="flex w-full">
@@ -242,7 +242,8 @@
                                                 <div class="flex basis-1/2 px-1 break-all overflow-hidden min-w-0">
                                                     {{ $header->key }}
                                                 </div>
-                                                <div class="flex basis-1/2 pl-1 pr-10 break-all overflow-hidden min-w-0">
+                                                <div
+                                                    class="flex basis-1/2 pl-1 pr-10 break-all overflow-hidden min-w-0">
                                                     {{ $header->value }}
                                                 </div>
                                                 <form method="POST" enctype="multipart/form-data" x-show="show"
@@ -314,7 +315,8 @@
                                                 <div class="flex basis-1/2 pl-1 break-all overflow-hidden min-w-0">
                                                     {{ $cookie->key }}
                                                 </div>
-                                                <div class="flex basis-1/2 pl-1 pr-10 break-all overflow-hidden min-w-0">
+                                                <div
+                                                    class="flex basis-1/2 pl-1 pr-10 break-all overflow-hidden min-w-0">
                                                     {{ $cookie->value }}
                                                 </div>
                                                 <form method="POST" enctype="multipart/form-data" x-show="show"
@@ -386,7 +388,8 @@
                                                 <div class="flex basis-1/2 pl-1 break-all overflow-hidden min-w-0">
                                                     {{ $input->key }}
                                                 </div>
-                                                <div class="flex basis-1/2 pl-1 pr-10 break-all overflow-hidden min-w-0">
+                                                <div
+                                                    class="flex basis-1/2 pl-1 pr-10 break-all overflow-hidden min-w-0">
                                                     {{ $input->value }}
                                                 </div>
                                                 <form method="POST" enctype="multipart/form-data" x-show="show"
@@ -526,6 +529,7 @@
                 },
 
                 copy() {
+                    if (navigator.clipboard) {
                         navigator.clipboard.write(this.copy_text)
                             .then(() => {
                                 this.copied = true
@@ -534,6 +538,7 @@
                             .catch(err => {
                                 console.error('Error in copying text: ', err);
                             });
+                    }
                 }
             }))
         })
