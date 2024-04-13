@@ -530,7 +530,7 @@
 
                 copy() {
                     if (navigator.clipboard) {
-                        navigator.clipboard.write(this.copy_text)
+                        navigator.clipboard.write('vvv')
                             .then(() => {
                                 this.copied = true
                                 console.log('Text copied to clipboard');
