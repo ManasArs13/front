@@ -12,7 +12,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 //Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/docs', [HomeController::class, 'docs'])->name('docs');
+
 Route::get('/support', [HomeController::class, 'support'])->name('support');
+Route::post('/support', [HomeController::class, 'store'])->name('support.store');
 
 
 Route::resource('response', ResController::class)->only([

@@ -526,7 +526,6 @@
                 },
 
                 copy() {
-                    if (window.isSecureContext) {
                         navigator.clipboard.write(this.copy_text)
                             .then(() => {
                                 this.copied = true
@@ -535,7 +534,6 @@
                             .catch(err => {
                                 console.error('Error in copying text: ', err);
                             });
-                    }
                 }
             }))
         })

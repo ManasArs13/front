@@ -24,7 +24,7 @@
                         </svg>
                     </a>
                     <a href="{{ route('request.index') }}" rel="noopener"
-                        class="rounded text-center transition focus-visible:ring-2 ring-offset-2 ring-gray-200 px-5 py-2.5 bg-white hover:bg-teal-100 text-teal-900 flex gap-1 items-center justify-center">
+                        class="rounded text-center transition focus-visible:ring-2 ring-offset-2 ring-gray-200 px-5 py-2.5 bg-white hover:bg-teal-600 text-teal-900 hover:text-white flex gap-1 items-center justify-center">
                         {{ __('home.send request') }}
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-6 h-6">
@@ -96,7 +96,7 @@
                     </svg>
                 </a>
                 <a href="{{ route('request.index') }}" rel="noopener"
-                    class="rounded text-center transition focus-visible:ring-2 ring-offset-2 ring-gray-200 px-5 py-2.5 bg-white hover:bg-teal-100 text-teal-900 flex gap-1 items-center justify-center">
+                    class="rounded text-center transition focus-visible:ring-2 ring-offset-2 ring-gray-200 px-5 py-2.5 bg-white hover:bg-teal-600 text-teal-900 hover:text-white flex gap-1 items-center justify-center">
                     {{ __('home.send request') }}
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">

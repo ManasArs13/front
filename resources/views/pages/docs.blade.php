@@ -10,7 +10,7 @@
                 <div class="rounded-t-lg border border-neutral-200 bg-white dark:border-neutral-600 dark:bg-body-dark">
                     <h2 class="mb-0">
                         <button
-                            class="group relative flex w-full items-center rounded-t-lg border-0 bg-white px-5 py-4 text-left text-lg text-neutral-800 transition [overflow-anchor:none] hover:z-[2] focus:z-[3] focus:outline-none dark:bg-body-dark dark:text-white [&:not([data-twe-collapse-collapsed])]:bg-white [&:not([data-twe-collapse-collapsed])]:text-primary [&:not([data-twe-collapse-collapsed])]:shadow-border-b dark:[&:not([data-twe-collapse-collapsed])]:bg-surface-dark dark:[&:not([data-twe-collapse-collapsed])]:text-primary dark:[&:not([data-twe-collapse-collapsed])]:shadow-white/10 "
+                            class="group relative flex w-full items-center rounded-t-lg border-0 bg-white px-5 py-4 text-left text-lg font-semibold text-neutral-800 transition [overflow-anchor:none] hover:z-[2] focus:z-[3] focus:outline-none dark:bg-body-dark dark:text-white [&:not([data-twe-collapse-collapsed])]:bg-white [&:not([data-twe-collapse-collapsed])]:text-primary [&:not([data-twe-collapse-collapsed])]:shadow-border-b dark:[&:not([data-twe-collapse-collapsed])]:bg-surface-dark dark:[&:not([data-twe-collapse-collapsed])]:text-primary dark:[&:not([data-twe-collapse-collapsed])]:shadow-white/10 "
                             x-on:click="faqOne = !faqOne">
                             {{ __('pages.button1') }}
                             <span
@@ -32,7 +32,7 @@
                 <div class="border border-t-0 border-neutral-200 bg-white dark:border-neutral-600 dark:bg-body-dark">
                     <h2 class="mb-0">
                         <button
-                            class="group relative flex w-full items-center border-0 bg-white px-5 py-4 text-left text-lg text-neutral-800 transition [overflow-anchor:none] hover:z-[2] focus:z-[3] focus:outline-none dark:bg-body-dark dark:text-white [&:not([data-twe-collapse-collapsed])]:bg-white [&:not([data-twe-collapse-collapsed])]:text-primary [&:not([data-twe-collapse-collapsed])]:shadow-border-b dark:[&:not([data-twe-collapse-collapsed])]:bg-surface-dark dark:[&:not([data-twe-collapse-collapsed])]:text-primary dark:[&:not([data-twe-collapse-collapsed])]:shadow-white/10 "
+                            class="group relative flex w-full items-center border-0 bg-white px-5 py-4 text-left text-lg font-semibold text-neutral-800 transition [overflow-anchor:none] hover:z-[2] focus:z-[3] focus:outline-none dark:bg-body-dark dark:text-white [&:not([data-twe-collapse-collapsed])]:bg-white [&:not([data-twe-collapse-collapsed])]:text-primary [&:not([data-twe-collapse-collapsed])]:shadow-border-b dark:[&:not([data-twe-collapse-collapsed])]:bg-surface-dark dark:[&:not([data-twe-collapse-collapsed])]:text-primary dark:[&:not([data-twe-collapse-collapsed])]:shadow-white/10 "
                             x-on:click="faqTwo = !faqTwo">
                             {{ __('pages.button2') }}
                             <span
@@ -47,12 +47,11 @@
                     </h2>
                     <div x-cloak x-show="faqTwo">
                         <div class="px-5 py-4 text-base">
-                            Для регистрации и полного доступа к сервису пройдите регистрацию. <br /><br />
-                            1. Перейдите на главную страницу.<br />
-                            2. Нажмите кнопку "Регистрация".<br />
-                            3. Заполните необходимые поля формы.<br />
-                            4. Подтвердите регистрацию по ссылке, отправленной на указанный вами адрес электронной
-                            почты.
+                            {{ __('pages.To have full access to the service, please register.') }} <br /><br />
+                            {{ __('pages.1. Go to the main page.') }}<br />
+                            {{ __('pages.2. Click the "Register" button.') }}<br />
+                            {{ __('pages.3. Fill in the required fields of the form.') }}<br />
+                            {{ __('pages.4. Confirm the registration using the link sent to the email address you provided.') }}
                         </div>
                     </div>
                 </div>
@@ -60,7 +59,7 @@
                     class="rounded-b-lg border border-t-0 border-neutral-200 bg-white dark:border-neutral-600 dark:bg-body-dark">
                     <h2 class="accordion-header mb-0">
                         <button
-                            class="data-[twe-collapse-collapsed] group relative flex w-full items-center border-0 bg-white px-5 py-4 text-left text-lg text-neutral-800 transition [overflow-anchor:none] hover:z-[2] focus:z-[3] focus:outline-none data-[twe-collapse-collapsed]:rounded-b-lg dark:bg-body-dark dark:text-white [&:not([data-twe-collapse-collapsed])]:bg-white [&:not([data-twe-collapse-collapsed])]:text-primary [&:not([data-twe-collapse-collapsed])]:shadow-border-b dark:[&:not([data-twe-collapse-collapsed])]:bg-surface-dark dark:[&:not([data-twe-collapse-collapsed])]:text-primary  dark:[&:not([data-twe-collapse-collapsed])]:shadow-white/10"
+                            class="data-[twe-collapse-collapsed] group relative flex w-full items-center border-0 bg-white px-5 py-4 text-left text-lg font-semibold text-neutral-800 transition [overflow-anchor:none] hover:z-[2] focus:z-[3] focus:outline-none data-[twe-collapse-collapsed]:rounded-b-lg dark:bg-body-dark dark:text-white [&:not([data-twe-collapse-collapsed])]:bg-white [&:not([data-twe-collapse-collapsed])]:text-primary [&:not([data-twe-collapse-collapsed])]:shadow-border-b dark:[&:not([data-twe-collapse-collapsed])]:bg-surface-dark dark:[&:not([data-twe-collapse-collapsed])]:text-primary  dark:[&:not([data-twe-collapse-collapsed])]:shadow-white/10"
                             x-on:click="faqThree = !faqThree">
                             {{ __('pages.button3') }}
                             <span
@@ -75,11 +74,9 @@
                     </h2>
                     <div x-cloak x-show="faqThree">
                         <div class="px-5 py-4 text-base">
-                            1. Перейдите в меню api на необходимый вам раздел (отправить или получить запрос).<br />
-                            2. Заполните поля для запроса (метод, URL, заголовки, тело запроса).<br />
-                            3. Нажмите кнопку "Отправить".<br />
-                            4. Подтвердите регистрацию по ссылке, отправленной на указанный вами адрес электронной
-                            почты.
+                            {{ __('pages.1. Go to the api menu to the section you need (send or receive a request).') }}<br />
+                            {{ __('pages.2. Fill in the fields for the request (method, URL, headers, request body).') }}<br />
+                            {{ __('pages.3. Click the "Send" button.') }}<br />
                         </div>
                     </div>
                 </div>
