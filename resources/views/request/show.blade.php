@@ -452,10 +452,10 @@
                     <div class="relative">
                         <div
                             class="overflow-x-scroll min-w-full max-w-screen-md min-h-[20rem] text-left font-light text-white bg-gray-800 p-4 py-6 rounded-md">
-                            <button x-on:click="copy()" :class="copied ? 'fill-white' : 'fill-teal-300'"
+                            <button x-on:click="copy()" 
                                 class="flex content-center justify-center text-lg rounded-full absolute right-2 top-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                    data-slot="icon" class="w-6 h-6 m-auto hover:fill-teal-600">
+                                    data-slot="icon" class="w-6 h-6 m-auto hover:fill-teal-300" x-bind:class="copied == true ? '' : 'fill-teal-600'">
                                     <path fill-rule="evenodd"
                                         d="M17.663 3.118c.225.015.45.032.673.05C19.876 3.298 21 4.604 21 6.109v9.642a3 3 0 0 1-3 3V16.5c0-5.922-4.576-10.775-10.384-11.217.324-1.132 1.3-2.01 2.548-2.114.224-.019.448-.036.673-.051A3 3 0 0 1 13.5 1.5H15a3 3 0 0 1 2.663 1.618ZM12 4.5A1.5 1.5 0 0 1 13.5 3H15a1.5 1.5 0 0 1 1.5 1.5H12Z"
                                         clip-rule="evenodd" />
@@ -529,6 +529,8 @@
                 },
 
                 copy() {
+                   // this.copied = true
+                    console.log(this.copied)
                     if (navigator.clipboard) {
                         navigator.clipboard.writeText(this.copy_text)
                             .then(() => {
