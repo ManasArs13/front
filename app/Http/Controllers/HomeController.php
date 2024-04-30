@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Mail;
 class HomeController extends Controller
 {
     public function index()
-    {dd(Auth::user());
+    {
         return view('pages.home');
     }
 
