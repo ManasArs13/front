@@ -69,8 +69,6 @@
                             <div class="astronav-dropdown dropdown-toggle hidden" aria-expanded="false">
                                 <div class="lg:absolute w-full lg:w-48 z-10 lg:left-0 origin-top-left">
                                     <div class="px-3 lg:py-2 lg:bg-white lg:rounded-md lg:shadow lg:border flex flex-col">
-                                        <a href="{{ route('dashboard') }}"
-                                            class="py-1 text-gray-900 hover:text-teal-600">{{ __('navigation.get response') }}</a>
                                         <a href="{{ route('profile.edit') }}"
                                             class="py-1 text-gray-900 hover:text-teal-600">{{ __('navigation.get response') }}</a>
                                         <a href="{{ route('logout') }}"

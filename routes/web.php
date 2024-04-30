@@ -31,7 +31,8 @@ Route::resource('input', InputController::class)->only('store', 'destroy');
 
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return redirect()->route('home');
+//    return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
